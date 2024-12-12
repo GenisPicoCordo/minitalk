@@ -11,7 +11,7 @@ This is a server/client system that uses UNIX signals for communication. The ser
 ## HOW TO USE
 #### 1º - Clone the repository
 ```bash
-git clone https://github.com/jotavare/minitalk
+git clone https://github.com/genispicocordo/minitalk
 ```
 
 #### 2º - Enter the project folder and run `make`
