@@ -20,9 +20,21 @@ void	send_char(pid_t server_pid, char c)
 	while (bit >= 0)
 	{
 		if ((c >> bit) & 1)
-			kill(server_pid, SIGUSR2);
+		{
+			if (kill(server_pid, SIGUSR2) == -1)
+			{
+				perror("Error sending SIGUSR2");
+				exit(1);
+			}
+		}	
 		else
-			kill(server_pid, SIGUSR1);
+		{
+			if (kill(server_pid, SIGUSR1) == -1)
+			{
+				perror("Error sending SIGUSR1");
+				exit(1);
+			}
+		}	
 		usleep(100);
 		bit--;
 	}
