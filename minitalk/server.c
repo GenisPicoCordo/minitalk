@@ -18,7 +18,6 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 	static int	bit = 0;
 
 	(void)context;
-	(void)info;
 	if (sig == SIGUSR2)
 		c |= (1 << (7 - bit));
 	bit++;
@@ -43,6 +42,7 @@ int	main(void)
 	ft_printf("Server PID: %d\n", pid);
 	action.sa_flags = SA_SIGINFO;
 	action.sa_sigaction = handle_signal;
+	sigemptyset(&action.sa_mask);
 	sigaction(SIGUSR1, &action, NULL);
 	sigaction(SIGUSR2, &action, NULL);
 	while (1)
