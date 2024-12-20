@@ -35,7 +35,7 @@ OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
 # Reglas principales
-all: $(LIBFT) $(PRINTF) $(NAME_SERVER) $(NAME_CLIENT)
+all: makelibft makeprintf $(NAME_SERVER) $(NAME_CLIENT)
 
 bonus: $(BONUS_OBJS) $(LIBFT) $(PRINTF)
 	@echo "Compilando client en modo BONUS..."
@@ -44,7 +44,7 @@ bonus: $(BONUS_OBJS) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) bonus/server_bonus.o $(LIBFT) $(PRINTF) -o $(NAME_SERVER)
 	@echo "Modo BONUS compilado correctamente!"
 
-%.o: %.c Makefile $(INCLUDES)minitalk.h $(LIBFTDIR)libft.h $(PRINTFDIR)ft_printf.h
+%.o: %.c Makefile $(INCLUDES)minitalk.h
 	$(CC) $(CFLAGS) -I$(INCLUDES) -I$(LIBFTDIR) -I$(PRINTFDIR) -c $< -o $@
 	@echo "Compilando: $<"
 
@@ -58,11 +58,11 @@ $(NAME_CLIENT): $(OBJ_CLIENT) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) $(OBJ_CLIENT) $(LIBFT) $(PRINTF) -o $(NAME_CLIENT)
 	@echo "$(NAME_CLIENT) compilado correctamente!"
 
-$(LIBFT):
+makelibft:
 	@echo "Compilando libft..."
 	@$(MAKE) -C $(LIBFTDIR)
 
-$(PRINTF):
+makeprintf:
 	@echo "Compilando ft_printf..."
 	@$(MAKE) -C $(PRINTFDIR)
 
